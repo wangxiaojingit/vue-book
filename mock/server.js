@@ -3,7 +3,18 @@ let fs=require("fs");
 let url=require("url");
 
 let slider=require("./slider");
-console.log(slider)
+
+ function read(url,cb){
+   fs.readFile(url,"utf8",function(err,data){
+    
+       if(err||data.length==0){
+          cb([])     
+       }else{
+         cb(JSON.parse(data))
+       }
+   })
+ }
+ 
 //获取轮播图/slider 
 http.createServer(function(req,res){
   // 解决跨域.设置头部可跨域
@@ -19,8 +30,20 @@ http.createServer(function(req,res){
       //说明请求的是/slider 接口
       res.setHeader("content-type","application/json;charset=utf8")
       res.end(JSON.stringify(slider)) //把数据返回
+      return;
    }
-}).listen(3002);
+   if(pathname=="/hot"){
+     //说明请求的是热门推荐
+     let hotdata=[];
+    read("./doo.json",function(data){
+      res.setHeader("content-type","application/json;charset=utf8");
+      res.end(JSON.stringify(data))
+      return;
+    })
+
+
+   }
+}).listen(3009);
 
 
 //用node 起服务,用cmd 打开这个js所在的目录,然后用 node server.js 回车

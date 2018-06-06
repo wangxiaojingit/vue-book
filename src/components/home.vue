@@ -10,16 +10,29 @@
 <script>
 import MyHead from "../base/myhead.vue"
 import Banner from "../base/banner.vue"
-import { getBanner } from "../api/index.js"
+import { getBanner , getDoor} from "../api/index.js"
  export default{
-     async created(){
-       let {data:banner} = await getBanner();
-       this.banner=banner;
+      created(){
+       
+       this.getBannerFn();
+       this.getDor();
      },
      data(){
          return {
            banner:[]
          }
+     },
+     methods:{
+      async getBannerFn(){
+          debugger;
+       let {data:banner} = await getBanner();
+       
+        this.banner=banner
+       },
+      async getDor(){
+        let {data:hot} = await getDoor();
+        this.hot=hot
+       }
      },
      components:{
          MyHead,Banner
