@@ -7,7 +7,7 @@
                 </div>
                 <div class="name">{{item.name}}</div>
                 <div class="price">{{item.price | pricefilter}}</div>
-                <slot name="removestr" ></slot>
+                <span class="removebtn" v-if="rem" @click="remove(item.id)">删除</span>
             </li>
         </ul>
     </div>    
@@ -15,7 +15,10 @@
 <script>
   export default {
       props:{
-         
+          rem:{
+              type:Boolean,
+              default:false
+          },
           hot:{
               type:Array,
               default:[]
@@ -32,7 +35,10 @@
           }
       },
       methods:{
-          
+          remove(id){
+              this.$emit("rem",id)
+             // this.hot=this.hot.filter(item=>{item!=id});
+          }
       }
   }
 </script>
@@ -66,7 +72,14 @@
         .price{
             color:red;
         }
-        
+        .removebtn{
+         padding:5px 15px;
+         border-radius:5px;
+         background: rgb(255, 123, 0);
+         font-size: 12px;
+         display: inline-block;
+         color:#fff;
+       }
       }
   }
 }

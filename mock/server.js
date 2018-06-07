@@ -65,6 +65,7 @@ http.createServer(function(req,res){
           }
           break;
           case "DELETE":
+          alert(id);
            //读那个文件,获取到数据之后过滤,然后重新写入文件
            read("./doo.json",function(data){
               let newData=data.filter((item)=>{return item.id!=id});

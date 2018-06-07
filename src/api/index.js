@@ -15,3 +15,7 @@ export let getDoor=function(){
 export let listAll=function(){
     return axios.get(bathUrl+"/alllist")
 }
+//删除列表商品
+export let deldor=function(id){
+   return axios.delete(bathUrl+"/alllist?id="+id)
+}

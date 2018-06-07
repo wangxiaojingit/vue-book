@@ -2,8 +2,8 @@
  <div>
      <MyHead>列表页</MyHead>
      <div class="main">
-         <List :hot="lists" v-if="lists.length">
-             <span class="removebtn" slot="removestr" @click="removefn">删除</span>
+         <List :hot="lists" :rem="true" v-if="lists.length" @rem="changelists" >
+            
          </List>
      </div>
  </div>
@@ -32,9 +32,14 @@ export default {
          console.log(lists)
            this.lists = lists
         },
-        removefn(){
-            alert(1)
-        }
+        changelists(id){
+            this.lists=this.lists.filter(function(item){
+             
+               return item.id!=id
+            })
+            
+            
+        },
     },
     components:{
         MyHead,List
@@ -50,13 +55,6 @@ export default {
        right:0;
        overflow: auto;
 
-       .removebtn{
-         padding:5px 15px;
-         border-radius:5px;
-         background: rgb(255, 123, 0);
-         font-size: 12px;
-         display: inline-block;
-         color:#fff;
-       }
+       
    }
 </style>
