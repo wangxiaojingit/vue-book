@@ -16,9 +16,13 @@ export default {
 <style scoped lang="less">
     #myhead{
         height:50px;
-        border-bottom:1px solid yellowgreen;
         color:darkcyan;
-        position:relative;
+        position:fixed;
+        left:0;
+        right:0;
+        top:0;
+        height:50px;
+        z-index:999;
         line-height:50px;
         background:rgba(0,0,0,.8);
         i{

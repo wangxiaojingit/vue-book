@@ -21,6 +21,15 @@ export default {
 </script>
 
 <style>
+*{margin:0;padding:0;}
+.clearfix:before,.clearfix:after {
+  display: table;
+  content: " "
+}
+
+.clearfix:after {
+  clear: both
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

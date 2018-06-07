@@ -35,6 +35,11 @@ export default new Router({
     {
       path:'/collet',
       component:Collet
+    },
+    {
+      path:'*',
+      redirect:"/home"
+     
     }
   ]
 })
