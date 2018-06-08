@@ -1,6 +1,6 @@
 <template>
     <div id="myhead">
-       <i class="iconfont icon-fanhui" v-if="back"></i> <slot></slot>
+       <i @click="goback" class="iconfont icon-fanhui" v-if="back"></i> <slot></slot>
     </div>
 </template>
 <script>
@@ -11,12 +11,22 @@ export default {
              default:false
          }
      },
+     data(){
+         return {
+             
+         }
+     },
+     methods:{
+         goback(){
+             this.$router.go(-1)
+         }
+     }
 }
 </script>
 <style scoped lang="less">
     #myhead{
         height:50px;
-        color:darkcyan;
+        color:#fff;
         position:fixed;
         left:0;
         right:0;

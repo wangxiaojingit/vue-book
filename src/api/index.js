@@ -19,3 +19,17 @@ export let listAll=function(){
 export let deldor=function(id){
    return axios.delete(bathUrl+"/alllist?id="+id)
 }
+//详情页数据
+export let dolDel=function(id){
+   //return axios.get(bathUrl+"/alllist?id="+id) 
+   return axios.get(`${bathUrl}/alllist?id=${id}`)
+}
+
+//修改数据
+export let changeDol=function(id,data){
+   return axios.put(`${bathUrl}/alllist?id=${id}`,data)
+}
+//添加数据
+export let addDol=function(data){
+  return axios.post(`${bathUrl}/alllist`,data)
+}

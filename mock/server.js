@@ -25,7 +25,7 @@ http.createServer(function(req,res){
    res.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
    res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
    res.setHeader("X-Powered-By",' 3.2.1')
-   if(req.method=="OPTIONS") return res.send();/*让options请求快速返回*/
+   if(req.method=="OPTIONS") return res.end();/*让options请求快速返回*/
    
 
    let {pathname,query}=url.parse(req.url,true);//true 把query 转换成对象
@@ -53,6 +53,15 @@ http.createServer(function(req,res){
           case "GET":
           if(id){
              //如果id存在就是查询
+            read("./doo.json",function(data){
+              let dol= data.find(item=>item.id==id);
+              if(!dol){
+                dol= {}
+              }
+              res.setHeader("content-type","application/json;charset=utf8");
+              res.end(JSON.stringify(dol));
+            }) 
+
           }else{
             //如果id 不存在就是查询所有
             //请求列表
@@ -64,12 +73,61 @@ http.createServer(function(req,res){
 
           }
           break;
-          case "DELETE":
-          alert(id);
+          case "POST":
+            let str="";
+            req.on("data",trunk=>{
+              str+=trunk;
+            });
+            req.on("end",()=>{
+               //把添加的数据写入到数据库
+               read("./doo.json",function(data){
+                    str=JSON.parse(str)
+                    str.id=data.length?data[data.length-1].id+1:1;
+                   
+                    data.unshift(str);
+                    write("./doo.json",data,function(){
+                       //把添加的数据返回
+                        res.end(JSON.stringify(str));
+               
+                    })
+                    
+               })
+               //把读到的数据返回
+            })
+          
+          break;
+          case "PUT":
+          if(id){
+            let str="";
+          
+            req.on("data",trunk=>{
+               str+=trunk;
+            })
+            req.on("end",()=>{
+               let dor=JSON.parse(str);
+               read("./doo.json",function(data){
+                 let newData=  data.map(item=>{
+                     if(item.id==id){
+                       return dor
+                     }else{
+                       return item;
+                     }
+                  })
+                  write("./doo.json",newData,function(){
+                    res.end(JSON.stringify(newData))
+                  })
+               })
+            })
+          }
+          break;
+         
+          case "DELETE": 
+           
            //读那个文件,获取到数据之后过滤,然后重新写入文件
            read("./doo.json",function(data){
               let newData=data.filter((item)=>{return item.id!=id});
               write("./doo.json",data,function(err){
+               
                  res.end(JSON.stringify({}));
               })
            })

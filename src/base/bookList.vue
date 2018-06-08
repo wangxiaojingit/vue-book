@@ -1,14 +1,27 @@
 <template>
     <div id="recomment">
         <ul class="clearfix">
-            <li v-for="(item ,index ) in hot" :key="index">
+            <!-- <li v-for="(item ,index ) in hot" :key="index" @click="toDetail(item.id)">
                 <div class="imgbox">
                   <img :src="item.cover" alt="">
                 </div>
                 <div class="name">{{item.name}}</div>
                 <div class="price">{{item.price | pricefilter}}</div>
                 <span class="removebtn" v-if="rem" @click="remove(item.id)">删除</span>
-            </li>
+            </li> -->
+             <router-link tag="li" 
+             v-for="(item ,index ) in hot" 
+             :key="index" 
+            
+             :to="{name:'detail',params:{id:item.id}}"
+             >
+                <div class="imgbox">
+                  <img :src="item.cover" alt="">
+                </div>
+                <div class="name">{{item.name}}</div>
+                <div class="price">{{item.price | pricefilter}}</div>
+                <span class="removebtn" v-if="rem" @click="remove(item.id)">删除</span>
+            </router-link>
         </ul>
     </div>    
 </template>
@@ -38,6 +51,10 @@
           remove(id){
               this.$emit("rem",id)
              // this.hot=this.hot.filter(item=>{item!=id});
+          },
+          toDetail(id){
+            this.$router.push({path:`/detail/${id}`})
+          // this.$router.push("/detail") 不带参数
           }
       }
   }

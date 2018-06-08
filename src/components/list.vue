@@ -10,7 +10,7 @@
 </template>
 <script>
 import MyHead from "../base/myhead.vue" ;
-import {listAll} from "../api/index.js";
+import {listAll,deldor} from "../api/index.js";
 import List from "../base/bookList.vue";
 
 export default {
@@ -33,8 +33,8 @@ export default {
            this.lists = lists
         },
         changelists(id){
+            deldor(id);
             this.lists=this.lists.filter(function(item){
-             
                return item.id!=id
             })
             
