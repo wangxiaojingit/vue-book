@@ -11,6 +11,14 @@ export let getBanner=function(){
 export let getDoor=function(){
     return axios.get(bathUrl+"/hot")
 }
+
+//首页合并请求
+
+export let getHome=function(){
+    return   axios.all([getBanner(),getDoor()])
+}
+
+
 //请求列表
 export let listAll=function(){
     return axios.get(bathUrl+"/alllist")
@@ -33,3 +41,4 @@ export let changeDol=function(id,data){
 export let addDol=function(data){
   return axios.post(`${bathUrl}/alllist`,data)
 }
+
