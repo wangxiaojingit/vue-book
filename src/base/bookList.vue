@@ -16,7 +16,7 @@
              :to="{name:'detail',params:{id:item.id}}"
              >
                 <div class="imgbox">
-                  <img :src="item.cover" alt="">
+                  <img v-lazy="item.cover" alt="">
                 </div>
                 <div class="name">{{item.name}}</div>
                 <div class="price">{{item.price | pricefilter}}</div>
