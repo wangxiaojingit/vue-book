@@ -23,6 +23,11 @@ export let getHome=function(){
 export let listAll=function(){
     return axios.get(bathUrl+"/alllist")
 }
+
+//列表分页接口
+export let pagition=function(start){
+     return axios.get(`${bathUrl}/page?start=${start}`)
+}
 //删除列表商品
 export let deldor=function(id){
    return axios.delete(bathUrl+"/alllist?id="+id)

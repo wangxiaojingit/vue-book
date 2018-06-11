@@ -1,7 +1,7 @@
 let http=require("http");
 let fs=require("fs");
 let url=require("url");
-
+let pageSize=5; //每页的调数
 let slider=require("./slider");
 
  function read(url,cb){
@@ -46,6 +46,26 @@ http.createServer(function(req,res){
 
 
     }
+    if(pathname=="/page"){
+       let start=parseInt(query.start)||0;//每次请求的起始条数index
+       
+       read("./doo.json",function(data){
+          let hasMore=true;
+          let result=data.slice(start,start+pageSize);//需要返回的数据
+         
+          if(data.length<=start+pageSize){
+            hasMore=false;
+          }
+          res.setHeader("content-type","application/json;charset=utf8");
+            setTimeout(function(){
+              res.end(JSON.stringify({hasMore,dol:result}))
+            },2000)
+            
+         
+         
+
+       })
+    }
 
     if(pathname=="/alllist"){ 
        let id=query.id;
@@ -83,7 +103,6 @@ http.createServer(function(req,res){
                read("./doo.json",function(data){
                     str=JSON.parse(str)
                     str.id=data.length?data[data.length-1].id+1:1;
-                   
                     data.unshift(str);
                     write("./doo.json",data,function(){
                        //把添加的数据返回

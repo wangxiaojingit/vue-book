@@ -18,11 +18,17 @@ export default new Router({
       component:Home
     },{
       path:'/home',
-      component:Home
+      component:Home,
+      meta:{  //单独设置路由上的页面是否被缓存
+        keepAlive:true
+      }
     },
     {
       path:'/list',
-      component:List
+      component:List,
+      meta:{
+        keepAlive:true
+      }
     },
     {
       path:'/detail/:id',
