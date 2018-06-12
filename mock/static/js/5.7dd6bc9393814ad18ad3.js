@@ -1,0 +1,2 @@
+webpackJsonp([5],{Iq7w:function(e,n){},ZrOz:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={data:function(){return{}},components:{MyHead:t("uddc").a}},a={render:function(){var e=this.$createElement,n=this._self._c||e;return n("div",[n("MyHead",[this._v("收藏页")])],1)},staticRenderFns:[]};var u=t("vSla")(r,a,!1,function(e){t("Iq7w")},null,null);n.default=u.exports}});
+//# sourceMappingURL=5.7dd6bc9393814ad18ad3.js.map

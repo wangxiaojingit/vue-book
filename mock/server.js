@@ -151,15 +151,26 @@ http.createServer(function(req,res){
               })
            })
           break;
-
        }
-       
-       
-
     }
+    
+    fs.stat("."+pathname,function(err,stats){
+      if(err){
+        //  res.statusCode=404;
+        //  res.setHeader("content-type","application/json;charset=utf8");
+        // res.end("not found")
+      }else{
+        if(stats.isDirectory()){
+          let p=require("path").join("."+pathname,'./index.html');
+          fs.createReadStream(p).pipe(res);
+        }else{
+          fs.createReadStream("."+pathname).pipe(res)
+        }
+      }
+    })
 
 
-}).listen(8000);
+  }).listen(8000);
 
 
 //用node 起服务,用cmd 打开这个js所在的目录,然后用 node server.js 回车
