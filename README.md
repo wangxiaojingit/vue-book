@@ -28,3 +28,17 @@ axios.all([])
     <router-view v-if="!$route.meta.keepAlive" ></router-view>
 
 ```
+
+3 我们启动服务在访问页面的时候,查看network 的时候只有一个app.js,把所有的请求都打包成一个
+无论我们访问哪个页面,都是全部加载,为了优化,实现按需加载,我们看vue-router文档中的路由懒加载
+中有一个按组件分块.在router下面的index.js
+```
+let helloWorld =()=>import('../components/HelloWorld');
+let Home=()=>import("../components/home.vue"); 
+let List=()=>import("../components/list.vue"); 
+let Detail=()=>import("../components/detail.vue")  
+let Add=()=>import("../components/add.vue")  
+let Collet=()=>import("../components/collet.vue")  
+
+```
+这样我们在访问首页的时候,就只加载首页的,访问列表页的时候就加载列表页的请求

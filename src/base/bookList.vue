@@ -11,13 +11,13 @@
             </li> -->
              <router-link tag="li" 
              v-for="(item ,index ) in hot" 
-             :key="index" 
+             :key="index"
             
              :to="{name:'detail',params:{id:item.id}}"
              >
                 <div class="imgbox">
                   <img v-lazy="item.cover" alt="">
-                </div>
+                </div> 
                 <div class="name">{{item.name}}</div>
                 <div class="price">{{item.price | pricefilter}}</div>
                 <span class="removebtn" v-if="rem" @click="remove(item.id)">删除</span>

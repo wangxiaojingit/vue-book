@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Home from "../components/home.vue"
-import List from "../components/list.vue"
-import Detail from "../components/detail.vue"
-import Add from "../components/add.vue"
-import Collet from "../components/collet.vue"
+let helloWorld =()=>import('../components/HelloWorld');
+let Home=()=>import("../components/home.vue"); 
+let List=()=>import("../components/list.vue"); 
+let Detail=()=>import("../components/detail.vue")  
+let Add=()=>import("../components/add.vue")  
+let Collet=()=>import("../components/collet.vue")  
 
 
 Vue.use(Router)
