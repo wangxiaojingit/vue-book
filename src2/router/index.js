@@ -15,33 +15,45 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component:Home
+      component:Home,
+      meta:{title:"首页"}
     },{
       path:'/home',
       component:Home,
       meta:{  //单独设置路由上的页面是否被缓存
-        keepAlive:true
+        keepAlive:true,
+        title:"首页"
       }
     },
     {
       path:'/list',
       component:List,
       meta:{
-        keepAlive:true
+        keepAlive:true,
+        title:"列表页"
       }
     },
     {
       path:'/detail/:id',
       component:Detail,
-      name:"detail"
+      name:"detail",
+      meta:{
+        title:"详情页"
+      }
     },
     {
       path:'/add',
-      component:Add
+      component:Add,
+      meta:{
+        title:"添加页"
+      }
     },
     {
       path:'/collet',
-      component:Collet
+      component:Collet,
+      meta:{
+        title:"收藏页"
+      }
     },
     {
       path:'*',

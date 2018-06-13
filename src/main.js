@@ -1,34 +1,39 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
 
 
+//vuex 只为大型项目,只能用在vue 中
+//将数据统一管理
 
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-Vue.config.productionTip = false
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
+import Vue from "vue";
+import Vuex from "vuex";
+import App from "./App.vue";
+import logger from"vuex/dist/logger.js" //logger 是一个日志插件
 
-
-
-//Vue.use(VueLazyload)
-//懒加载 ,除此之外在页面上还需要把:src  改成v-lazy=
-import VueLazyload from 'vue-lazyload';
-import err from "./assets/error.jpg";
-import load from "./assets/loading.gif";
-Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: err,
-  loading: load,
-  attempt: 1,
-  listenEvents:['scroll']
+Vue.use(Vuex);
+const state={
+  count:0
+};
+const mutations={
+   add(state,n){
+     state.count+=n;
+   },
+   reduce(state,n){
+     state.count-=n;
+   }
+}
+const store=new Vuex.Store({
+        plugins:[logger()], //执行logger,可以打印出每次state 的状态值
+        strict:true,//开启严格模式,状态改变,只能通过提交mution,直接修改state 会报错
+       state,
+       mutations
 })
-/* eslint-disable no-new */
+
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el:'#app',
+    data:{
+      msg:"hello"
+    },
+    
+    components: { App },
+    template: '<App/>',
+    store 
 })

@@ -1,23 +1,19 @@
 <template>
-<div>
-   <Count></Count>
+<div >
+   {{msg}}
 </div>
 </template>
 <script>
-import Count from "./components/count.vue"
 export default {
     data(){
         return {
-           msg:"zff"
+          msg:"hello"
         }
-    },
-    components:{
-        Count
     }
 }
 </script>
 <style scoped>
-  
+
 </style>
 
 

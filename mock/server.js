@@ -59,7 +59,7 @@ http.createServer(function(req,res){
           res.setHeader("content-type","application/json;charset=utf8");
             setTimeout(function(){
               res.end(JSON.stringify({hasMore,dol:result}))
-            },2000)
+            },500)
             
          
          

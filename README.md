@@ -42,3 +42,44 @@ let Collet=()=>import("../components/collet.vue")
 
 ```
 这样我们在访问首页的时候,就只加载首页的,访问列表页的时候就加载列表页的请求
+
+
+### 路由的钩子函数
+如果我们想要给每个view 添加title
+我们可以在router下面的index里面添加meta:{title:"首页"},给每个路由添加信息,我们再在每个组件页面的created钩子函数中写逻辑
+```
+   document.title=this.$route.meta.title
+
+```
+上面的方法,比较麻烦,每个页面都需要添加,我们有更好的方法,就是在main.js 中添加共有方法
+ router.beforeEach:遍历每一个路由,在跳转前
+
+```
+ router.beforeEach(function(to,from,next){
+     document.title=to.meta.title;
+     next() //必须写next(),不然路由不往下面走
+ })
+
+```
+
+还可以做其它逻辑,如果跳转路径是"/list",就让其跳到添加页面,一般用来做权限跳转
+```
+  router.beforeEach(function(to,from,next){
+  debugger;
+   if(to.path=="/list"){
+     next({path:'/home'})
+   }else{
+    console.log(to.meta.title)
+    document.title=to.meta.title;
+    next();
+ 
+   }
+})
+```
+
+### 更改打包路径,在bulid 下面的webpack.base.conf.js,更改打包路径为src1下面的main.js
+```
+    entry: {
+      app:"./src1/main.js"
+  },
+```
