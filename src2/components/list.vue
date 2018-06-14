@@ -2,7 +2,7 @@
  <div>
      <MyHead>列表页</MyHead>
      <div class="main" ref="scroll" @scroll="loadMore">
-         <List :hot="lists" :rem="true" v-if="lists.length" @rem="changelists" >
+         <List :hot="lists" :rem="true" :carIcon="true" v-if="lists.length" @rem="changelists" >
          </List>
          <div class="loading" @click="loadMore">下拉加载更多</div>
      </div>

@@ -14,21 +14,29 @@
              :key="index"
             
              :to="{name:'detail',params:{id:item.id}}"
-             >
+             >   
+                <!-- cartIcon  -->
+                <div v-if="carIcon" class="cart iconfont icon-gouwuche" @click.stop="addcart(item.id)"></div>
                 <div class="imgbox">
                   <img v-lazy="item.cover" alt="">
                 </div> 
                 <div class="name">{{item.name}}</div>
                 <div class="price">{{item.price | pricefilter}}</div>
-                <span class="removebtn" v-if="rem" @click="remove(item.id)">删除</span>
+                <span class="removebtn" v-if="rem" @click.stop="remove(item.id)">删除</span>
             </router-link>
         </ul>
     </div>    
 </template>
 <script>
+import {dolDel} from "../api/index.js";
+import * as Types from "../vuex/mutations_types.js";
   export default {
       props:{
           rem:{
+              type:Boolean,
+              default:false
+          },
+          carIcon:{
               type:Boolean,
               default:false
           },
@@ -55,6 +63,17 @@
           toDetail(id){
             this.$router.push({path:`/detail/${id}`})
           // this.$router.push("/detail") 不带参数
+          },
+          //查询具体是哪个商品
+         async lookDetail(id){
+              
+            let {data:dol}=  await dolDel(id);
+           
+            this.$store.commit(Types.ADDCART,dol)
+          },
+          addcart(id){
+            
+            this.lookDetail(id)
           }
       }
   }
@@ -71,6 +90,13 @@
         float:left;
         margin-bottom:10px;
         overflow:hidden;
+        position:relative;
+        .cart{
+            position:absolute;
+            right:1rem;
+            top:0;
+            font-size:24px;
+        }
         .imgbox{
             width:100%;
             height:120px;

@@ -11,15 +11,18 @@ Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 //每次进入路由之前都会进入这个方法 路由的钩子函数
 router.beforeEach(function(to,from,next){
-  debugger;
-   if(to.path=="/list"){
-     next({path:'/home'})
-   }else{
-    console.log(to.meta.title)
-    document.title=to.meta.title;
-    next();
  
-   }
+  //  if(to.path=="/list"){
+  //    next({path:'/home'})
+  //  }else{
+  //   console.log(to.meta.title)
+  //   document.title=to.meta.title;
+  //   next();
+ 
+  //  }
+
+   document.title=to.meta.title;
+   next();
 })
 
 //Vue.use(VueLazyload)
@@ -27,6 +30,7 @@ router.beforeEach(function(to,from,next){
 import VueLazyload from 'vue-lazyload';
 import err from "./assets/error.jpg";
 import load from "./assets/loading.gif";
+import store from "./vuex/index.js"
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   error: err,
@@ -38,6 +42,7 @@ Vue.use(VueLazyload, {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
