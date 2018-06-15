@@ -13,15 +13,14 @@
                     <label for="price" >价格:</label>
                     <input type="text" v-model.number="dol.price" id="price">
                 </div>
-               
-                <div class="changebut" @click="addcart"> 添加购物车</div>
+                <!-- <div class="changebut" @click="changedol">确认修改</div> -->
+                <div class="changebut"> 添加购物车</div>
      </div>
  </div>
 </template>
 <script>
 import MyHead from "../base/myhead.vue";
 import {dolDel,changeDol} from "../api/index.js";
-import * as types from "../vuex/mutations_types.js";
 export default {
     created(){
         this.getdata();
@@ -57,17 +56,6 @@ export default {
             //点击确认修改的时候
           await changeDol(this.$route.params.id,this.dol);
           alert("修改成功")
-        },
-        addcart(){
-           //let id= this.$route.params.id;
-           //通过id 去找出那一项目的详细信息
-           // console.log(this.$store.state)
-           //添加到购物车,需要通知底部的购物按钮变红,并且需要把这个数据放到公用数据库store中
-           this.$store.commit(types.ADDCART,this.dol);
-           this.$store.commit(types.CARTFLAG,true);
-           this.$store.commit(types.CHANGECARTTOTAL); //修改购物车总数量
-           
-
         }
        
     },

@@ -12,11 +12,12 @@
              <router-link tag="li" 
              v-for="(item ,index ) in hot" 
              :key="index"
-            
              :to="{name:'detail',params:{id:item.id}}"
              >   
                 <!-- cartIcon  -->
-                <div v-if="carIcon" class="cart iconfont icon-gouwuche" @click.stop="addcart(item.id)"></div>
+                <!-- <div v-if="carIcon" class="cart iconfont icon-gouwuche" @click.stop="addcart(item.id,$event)">
+                    <div class="redcirle"></div>
+                </div> -->
                 <div class="imgbox">
                   <img v-lazy="item.cover" alt="">
                 </div> 
@@ -71,8 +72,12 @@ import * as Types from "../vuex/mutations_types.js";
            
             this.$store.commit(Types.ADDCART,dol)
           },
-          addcart(id){
-            
+          addcart(id,$event){
+            //点击购物车的时候,要让用户知道是已经添加的状态
+            var target=$event.target;
+            console.dir(target);
+            target.children[0].style.display="block";
+
             this.lookDetail(id)
           }
       }
@@ -96,6 +101,7 @@ import * as Types from "../vuex/mutations_types.js";
             right:1rem;
             top:0;
             font-size:24px;
+           
         }
         .imgbox{
             width:100%;

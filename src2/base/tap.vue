@@ -11,22 +11,64 @@
         
         </router-link>
         <router-link to="/add">
-        <i class="iconfont icon-tianjia"></i>
+        <i class="iconfont icon-tianjia">
+           
+        </i>
         <span>添加</span>
         
         </router-link>
         <router-link to="/collet">
-        <i class="iconfont icon-shoucang"></i>
-        <span>收藏</span>
+        <i class="iconfont icon-gouwuche cart" >
+            <!-- 购物车小红点 -->
+            <span class="redcirle" :class="{'show':$store.state.cartflag}"></span> 
+            <!-- 购物车的数量 -->
+            <i class="shoopingNum" :class="{'show':$store.state.cartflag}">{{$store.state.total|filternum}}</i>
+        </i>
+        <span>购物车</span>
         </router-link>
     </div>
 </template>
 <script>
 export default {
     
+     created(){
+         console.dir(this.$store.getters)
+     },
+     filters:{
+         filternum(val){
+            return "+"+val;
+         }
+     },
+     data(){
+         return {
+
+         }
+     }
 }
 </script>
 <style scoped lang="less">
+.cart{font-size:18px;position:relative}
+.shoopingNum{
+    font-size: 12px;
+    position: absolute;
+    left: 21px;
+    top: -28px;
+    color: red;
+    display: none;
+    height: 20px;
+}
+.show{display:block};
+.redcirle{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    top: -3px;
+    right: 8px;
+    display:none;
+    &.show{display:block;}
+}
    #footer{
        width:100%;
        height:60px;
